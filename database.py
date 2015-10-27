@@ -1,7 +1,11 @@
 #Goal: print out the hottest cities in July with following format:
 #The cities that are warmest in July are: city, state, city, state, etc.
 
+import sqlite3 as lite
+
 #Connect to getting_started.db
+
+con = lite.connect('getting_started.db')
 
 #Drop tables "cities" and "weather" if they exist
 
