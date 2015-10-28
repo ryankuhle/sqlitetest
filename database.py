@@ -44,9 +44,4 @@ with con:
     cur.execute("SELECT city, state FROM weather INNER JOIN cities ON city=name ORDER BY average_high DESC LIMIT 1")
     data = cur.fetchall()
     df = pd.DataFrame(data)
-    print df
-
-#
-#Load into a pandas DataFrame
-
-#Print out the resulting city and state in a full sentence. For example: "The cities that are warmest in July are: Las Vegas, NV, Atlanta, GA..."
+    print "The hottest city in July is: %s, %s" % ( df['city'], df['state'])
