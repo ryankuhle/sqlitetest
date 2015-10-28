@@ -30,6 +30,8 @@ weather = (('New York City', 2013, 'July', 'January', 62),
            ('Houston', 22013, 'July', 'January', 0))
 
 import sqlite3 as lite
+import pandas as pd
+
 con = lite.connect('getting_started.db')
 with con:
     cur = con.cursor()
@@ -40,6 +42,9 @@ with con:
     cur.executemany("INSERT INTO cities VALUES(?,?)", cities)
     cur.executemany("INSERT INTO weather VALUES(?,?,?,?,?)", weather)
     cur.execute("SELECT city, state FROM weather INNER JOIN cities ON city=name ORDER BY average_high DESC LIMIT 1")
+    data = cur.fetchall()
+    df = pd.DataFrame(data)
+    print df
 
 #
 #Load into a pandas DataFrame
