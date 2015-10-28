@@ -2,10 +2,11 @@
 #The cities that are warmest in July are: city, state, city, state, etc.
 
 import sqlite3 as lite
-
-#Connect to getting_started.db
-
 con = lite.connect('getting_started.db')
+with con:
+    cur = con.cursor()
+    cur.execute("DROP TABLE IF EXISTS cities")
+    cur.execute("DROP TABLE IF EXISTS weather")
 
 #Drop tables "cities" and "weather" if they exist
 
@@ -14,7 +15,7 @@ con = lite.connect('getting_started.db')
 #Create "cities" and "weather" tables
 ##CREATE TABLE cities (name text, state text);
 ##CREATE TABLE weather (city text, year integer, warm_month text, cold_month text, average_high integer);
-
+"""
 #Insert the appropriate data into tables
 cityIns = "INSERT INTO cities (name, state) VALUES
 ('New York City', 'NY'),
@@ -31,6 +32,8 @@ cityIns = "INSERT INTO cities (name, state) VALUES
 ('Washington', 'DC'),
 ('Houston', 'TX');"
 
+#Com = litep
+
 weatherIns = "INSERT INTO weather (city, year, warm_month, cold_month, average_high) VALUES
 ('New York City', 2013, 'July', 'January', 62),
 ('Boston', 2013, 'July', 'January', 59),
@@ -45,7 +48,7 @@ weatherIns = "INSERT INTO weather (city, year, warm_month, cold_month, average_h
 ('Atlanta', 2013, 'July', 'January', NULL),
 ('Washington', 2013, 'July', 'January', NULL),
 ('Houston', 22013, 'July', 'January', NULL);"
-
+"""
 #Join the data together
 
 #Load into a pandas DataFrame
