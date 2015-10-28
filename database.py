@@ -1,7 +1,6 @@
 #Goal: print out the hottest cities in July with following format:
 #The cities that are warmest in July are: city, state, city, state, etc.
 
-
 cities = (('New York City', 'NY'),
            ('Boston', 'MA'),
            ('Chicago', 'IL'),
@@ -40,11 +39,9 @@ with con:
     cur.execute("CREATE TABLE weather (city text, year integer, warm_month text, cold_month text, average_high integer)")
     cur.executemany("INSERT INTO cities VALUES(?,?)", cities)
     cur.executemany("INSERT INTO weather VALUES(?,?,?,?,?)", weather)
+    cur.execute("SELECT city, state FROM weather INNER JOIN cities ON city=name ORDER BY average_high DESC LIMIT 1")
 
-
-
-#Join the data together
-
+#
 #Load into a pandas DataFrame
 
 #Print out the resulting city and state in a full sentence. For example: "The cities that are warmest in July are: Las Vegas, NV, Atlanta, GA..."
