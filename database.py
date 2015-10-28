@@ -7,14 +7,10 @@ with con:
     cur = con.cursor()
     cur.execute("DROP TABLE IF EXISTS cities")
     cur.execute("DROP TABLE IF EXISTS weather")
+    cur.execute("CREATE TABLE cities (name text, state text)")
+    cur.execute("CREATE TABLE weather (city text, year integer, warm_month text, cold_month text, average_high integer)")
 
-#Drop tables "cities" and "weather" if they exist
 
-##DROP TABLE IF EXISTS cities, weather;
-
-#Create "cities" and "weather" tables
-##CREATE TABLE cities (name text, state text);
-##CREATE TABLE weather (city text, year integer, warm_month text, cold_month text, average_high integer);
 """
 #Insert the appropriate data into tables
 cityIns = "INSERT INTO cities (name, state) VALUES
