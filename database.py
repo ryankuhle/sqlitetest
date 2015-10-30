@@ -1,5 +1,5 @@
-#Goal: print out the hottest cities in July with following format:
-#The cities that are warmest in July are: city, state, city, state, etc.
+import sqlite3 as lite
+import pandas as pd
 
 cities = (('New York City', 'NY'),
            ('Boston', 'MA'),
@@ -29,9 +29,6 @@ weather = (('New York City', 2013, 'July', 'January', 62),
            ('Washington', 2013, 'July', 'January', 0),
            ('Houston', 22013, 'July', 'January', 0))
 
-import sqlite3 as lite
-import pandas as pd
-
 con = lite.connect('getting_started.db')
 with con:
     cur = con.cursor()
@@ -42,6 +39,7 @@ with con:
     cur.executemany("INSERT INTO cities VALUES(?,?)", cities)
     cur.executemany("INSERT INTO weather VALUES(?,?,?,?,?)", weather)
     cur.execute("SELECT city, state FROM weather INNER JOIN cities ON city=name ORDER BY average_high DESC LIMIT 1")
-    data = cur.fetchall()
-    df = pd.DataFrame(data)
-    print "The hottest city in July is: %s, %s" % ( df['city'], df['state'])
+    rows = cur.fetchall()
+    cols = [desc[0] for desc in cur.description]
+    df = pd.DataFrame(rows, columns=cols)
+    print "The hottest city in July is: %s, %s" % ( df.iloc[0]['city'], df.iloc[0]['state'])
